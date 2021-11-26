@@ -59,7 +59,7 @@ def compras():
 
 @app.route('/compras/lista')
 def compras_lista():
-    compras = Compras.query.filter(Vendas.id_usuario==current_user.id).order_by(Compras.id.asc())
+    compras = Compras.query.filter(Compras.id_usuario==current_user.id).order_by(Compras.id.asc())
 
     for compra in compras:
         #compra.data = datetime.datetime.fromtimestamp(compra.data).strftime('%d/%m/%Y')
