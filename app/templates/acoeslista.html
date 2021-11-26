@@ -6,19 +6,33 @@
         <div class="container">
             <br>
             <h4>Ações Cadastradas no Sistema:</h4> <br>
-            {% for acao in acoes %}
 
             <div class="container mt-0 d-flex">
                 <div class="card p-0">
                     <div class="d-flex">
                         <div class="ml-3 w-2000">
-                            <h6 class="mb-0 mt-0">{{ acao.id }} - {{ acao.ticker }} - {{ acao.nome }} </h6> <hr>
+                             <table class="table table-striped table-bordered table-condensed table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Id Ação</th>
+                                        <th>Ticker</th>
+                                        <th>Nome</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for acao in acoes %}
+                                     <tr>
+                                         <td>{{ acao.id }}</td>
+                                         <td>{{ acao.ticker }}</td>
+                                         <td>{{ acao.nome }}</td>
+                                     </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
-
-            {% endfor %}
         </div>
 <div class="row mt-5">
 
