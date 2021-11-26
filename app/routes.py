@@ -134,6 +134,8 @@ def apuracao():
         dataFiltro = dataSplit[1] + '-' + dataSplit[0] 
         list = []
         totalResultado = 0
+        totalGeralVendas = 0
+        imposto = 0
 
         lista =  database.session.execute(
             """
@@ -143,6 +145,7 @@ def apuracao():
                     sum(custo), 
                     sum(total_venda),
                     ((sum(total_venda) / sum(qtde_venda)) - (sum(custo) / sum(qtde_compra))) * (sum(qtde_venda))
+                    
                 from (
                     select a.ticker,
                             c.quantidade qtde_compra,
@@ -180,6 +183,7 @@ def apuracao():
                 'custo': "R${:,.2f}".format(tupla[3]),
                 'totalVendas': "R${:,.2f}".format(tupla[4])
 
+
             }
 
 
@@ -187,9 +191,21 @@ def apuracao():
                 totalResultado = totalResultado + tupla[5]
                 item.update({'resultado': "R${:,.2f}".format(tupla[5])})
 
+            if tupla[4] is not None:
+                totalGeralVendas = totalGeralVendas + tupla[4]
+                item.update({'totalGeralVendas': "R${:,.2f}".format(tupla[4])})
+
             list.append(item)
 
-        return render_template('apuracaolista.html', list=list, totalResultado=totalResultado, datacompetencia=form_apuracao.data.data)
+            if totalGeralVendas > 20000:
+                if totalResultado > 0:
+                    imposto = (totalResultado) * 15 / 100
+            else:
+                imposto = 0
+
+
+
+        return render_template('apuracaolista.html', list=list, totalResultado=totalResultado, datacompetencia=form_apuracao.data.data, totalGeralVendas=totalGeralVendas, imposto=imposto)
     return render_template('apuracao.html', form_apuracao=form_apuracao)
 
 # @app.route('/apuracao/lista')
