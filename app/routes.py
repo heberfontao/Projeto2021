@@ -50,7 +50,7 @@ def compras():
         #date = datetime.datetime.utcnow()
         #utc_time = calendar.timegm(date.utctimetuple())
 
-        compras = Compras(id_acao=form_compras.id_acao.data, autor=current_user, data=form_compras.data.data, quantidade=form_compras.quantidade.data, valor_unitario=form_compras.valor_unitario.data, total_taxas=form_compras.total_taxas.data, custo=(form_compras.valor_unitario.data * form_compras.quantidade.data)+form_compras.total_taxas.data)
+        compras = Compras(id_acao=(form_compras.id_acao.data).id, autor=current_user, data=form_compras.data.data, quantidade=form_compras.quantidade.data, valor_unitario=form_compras.valor_unitario.data, total_taxas=form_compras.total_taxas.data, custo=(form_compras.valor_unitario.data * form_compras.quantidade.data)+form_compras.total_taxas.data)
         database.session.add(compras)
         database.session.commit()
         flash('Compra Registrada com Sucesso', 'alert-success')
@@ -88,7 +88,7 @@ def compras_lista():
 def vendas():
     form_vendas = FormVendas()
     if form_vendas.validate_on_submit():
-        vendas = Vendas(id_acao=form_vendas.id_acao.data, autor=current_user, data=form_vendas.data.data, quantidade=form_vendas.quantidade.data, valor_unitario=form_vendas.valor_unitario.data, total_taxas=form_vendas.total_taxas.data, total_venda=(form_vendas.valor_unitario.data * form_vendas.quantidade.data)-form_vendas.total_taxas.data, resultado='0.0')
+        vendas = Vendas(id_acao=(form_vendas.id_acao.data).id, autor=current_user, data=form_vendas.data.data, quantidade=form_vendas.quantidade.data, valor_unitario=form_vendas.valor_unitario.data, total_taxas=form_vendas.total_taxas.data, total_venda=(form_vendas.valor_unitario.data * form_vendas.quantidade.data)-form_vendas.total_taxas.data, resultado='0.0')
         database.session.add(vendas)
         database.session.commit()
         flash('Compra Registrada com Sucesso', 'alert-success')

@@ -4,6 +4,8 @@ from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextA
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from app.models import Usuario
 from flask_login import current_user
+from wtforms_sqlalchemy.fields import QuerySelectField
+from app.models import Acoes
 
 
 class FormCriarConta(FlaskForm):
@@ -51,8 +53,12 @@ class FormAcoes(FlaskForm):
     nome = StringField('Nome da Ação', validators=[DataRequired()])
     botao_submit_acao = SubmitField('Gravar Ação')
 
+def choice_query():
+    return Acoes.query
+
 class FormCompras(FlaskForm):
-    id_acao = IntegerField('Id da Ação', validators=[DataRequired()])
+    #id_acao = IntegerField('Id da Ação', validators=[DataRequired()])
+    id_acao = QuerySelectField(query_factory=choice_query, allow_blank=True, get_label='ticker', validators=[DataRequired()])
     data = DateField('Data de Compra', validators=[DataRequired()])
     quantidade = IntegerField('Quantidade Adquirida', validators=[DataRequired()])
     valor_unitario = FloatField('Valor Unitário', validators=[DataRequired()])
@@ -61,7 +67,8 @@ class FormCompras(FlaskForm):
     botao_submit_compras = SubmitField('Gravar Compra')
 
 class FormVendas(FlaskForm):
-    id_acao = IntegerField('Id da Ação', validators=[DataRequired()])
+    #id_acao = IntegerField('Id da Ação', validators=[DataRequired()])
+    id_acao = QuerySelectField(query_factory=choice_query, allow_blank=True, get_label='ticker', validators=[DataRequired()])
     data = DateField('Data de Venda', validators=[DataRequired()])
     quantidade = IntegerField('Quantidade Vendida', validators=[DataRequired()])
     valor_unitario = FloatField('Valor Unitário', validators=[DataRequired()])
