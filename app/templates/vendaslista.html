@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+
+        <div class="container">
+            <br>
+            <h4>Vendas Cadastradas no Sistema:</h4> <br>
+
+
+            <div class="container mt-0 d-flex">
+
+                    <div class="d-flex">
+                        <div class="ml-3 w-2000">
+                            <table class="table table-striped table-bordered table-condensed table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Ação</th>
+                                        <th>Data Venda</th>
+                                        <th>Quantidade</th>
+                                        <th>Valor Unitário</th>
+                                        <th>Taxas</th>
+                                        <th>Total Venda</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for venda in vendas %}
+                                     <tr>
+                                         <td>{{ venda.acao.ticker }}</td>
+                                         <td>{{ venda.data_formatada }}</td>
+                                         <td>{{ venda.quantidade }}</td>
+                                         <td>{{ venda.valor }}</td>
+                                         <td>{{ venda.taxas }}</td>
+                                         <td>{{ venda.total_formatado }}</td>
+                                     </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+<div class="row mt-5">
+
+</div>
+{% endblock %}

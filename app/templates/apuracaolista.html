@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+
+        <div class="container">
+            <br>
+            <h4>Apurações Realizadas no Sistema:</h4> <br>
+            <h6>Mês de Apuração: {{ datacompetencia }}</h6>
+            <div class="container mt-0 d-flex">
+                    <div class="d-flex">
+                        <div class="ml-3 w-2000">
+                            <table class="table table-striped table-bordered table-condensed table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Ação</th>
+                                        <th>Quantidade Compras</th>
+                                        <th>Quantidade Vendas</th>
+                                        <th>Total Custo</th>
+                                        <th>Total Vendas</th>
+                                        <th>Resultado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for item in list %}
+                                    <tr>
+                                        <td>{{ item.ticker }}</td>
+                                        <td>{{ item.qtdeCompras }}</td>
+                                        <td>{{ item.qtdeVendas }}</td>
+                                        <td>{{ item.custo }}</td>
+                                        <td>{{ item.totalVendas }}</td>
+                                        <td>{{ item.resultado }}</td>
+                                    {% endfor %}
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="5" align="right"><b>Resultado</b></td>
+                                        <td><b>{{ "R${:,.2f}".format(totalResultado) }}</b></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+<div class="row mt-5">
+
+</div>
+{% endblock %}

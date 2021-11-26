@@ -1,0 +1,26 @@
+{% extends 'base.html' %} {% block body %}
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <form method="POST" action="" class="border p-4 mt-2">
+        {{ form_apuracao.csrf_token }}
+        <legend>Realizar a Apuração dos Resultados</legend>
+        <fieldset>
+          <div class="form-group">
+            {{ form_apuracao.data.label(class="form-control-label") }} {% if
+            form_apuracao.data.errors %} {{
+            form_apuracao.data(class="form-control is-invalid") }}
+            <div class="invalid-feedback">
+              {% for erro in form_apuracao.data.errors %} {{ erro }} {% endfor
+              %}
+            </div>
+            {% else %} {{ form_apuracao.data(class="form-control",
+            placeholder="MM/YYYY") }} {% endif %}
+          </div>
+        </fieldset>
+        {{ form_apuracao.botao_submit_apuracao(class="btn btn-primary mt-2") }}
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

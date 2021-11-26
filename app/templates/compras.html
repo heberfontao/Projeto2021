@@ -1,0 +1,82 @@
+{% extends 'base.html' %} {% block body %}
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <form method="POST" action="" class="border p-4 mt-2">
+        {{ form_compras.csrf_token }}
+        <legend>Lançar as Compras Realizadas</legend>
+        <fieldset>
+          <div class="form-group">
+            {{ form_compras.id_acao.label(class="form-control-label") }} {% if
+            form_compras.id_acao.errors %} {{
+            form_compras.id_acao(class="form-control is-invalid") }}
+            <div class="invalid-feedback">
+              {% for erro in form_compras.id_acao.errors %} {{ erro }} {% endfor
+              %}
+            </div>
+            {% else %} {{ form_compras.id_acao(class="form-control") }} {% endif
+            %}
+          </div>
+           <div class="form-group">
+              {{ form_compras.data.label(class="form-control-label") }}
+              {% if form_compras.data.errors %}
+              {{ form_compras.data(class="form-control is-invalid") }}
+                <div class="invalid-feedback">
+                  {% for erro in form_compras.data.errors %}
+                  {{ erro }}
+                  {% endfor %}
+                </div>
+                  {% else %}
+                  {{ form_compras.data(class="form-control") }}
+                  {% endif %}
+           </div>
+
+          <div class="form-group">
+            {{ form_compras.quantidade.label(class="form-control-label") }} {%
+            if form_compras.quantidade.errors %} {{
+            form_compras.quantidade(class="form-control is-invalid") }}
+            <div class="invalid-feedback">
+              {% for erro in form_compras.quantidade.errors %} {{ erro }} {%
+              endfor %}
+            </div>
+            {% else %} {{ form_compras.quantidade(class="form-control") }} {%
+            endif %}
+          </div>
+
+          <div class="form-group">
+            {{ form_compras.valor_unitario.label(class="form-control-label") }}
+            {% if form_compras.valor_unitario.errors %} {{
+            form_compras.valor_unitario(class="form-control is-invalid") }}
+            <div class="invalid-feedback">
+              {% for erro in form_compras.valor_unitario.errors %} {{ erro }} {%
+              endfor %}
+            </div>
+            {% else %} {{ form_compras.valor_unitario(class="form-control") }}
+            {% endif %}
+          </div>
+
+          <div class="form-group">
+            {{ form_compras.total_taxas.label(class="form-control-label") }} {%
+            if form_compras.total_taxas.errors %} {{
+            form_compras.total_taxas(class="form-control is-invalid") }}
+            <div class="invalid-feedback">
+              {% for erro in form_compras.total_taxas.errors %} {{ erro }} {%
+              endfor %}
+            </div>
+            {% else %} {{ form_compras.total_taxas(class="form-control") }} {%
+            endif %}
+          </div>
+        </fieldset>
+        {{ form_compras.botao_submit_compras(class="btn btn-primary mt-2") }}
+      </form>
+      <div class="container mt-3 d-flex justify-content-center">
+        <form method="get" action="/compras/lista">
+          <button class="btn btn-secondary mt-2" type="submit">
+            Listar Todas Compras
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
